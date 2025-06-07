@@ -1,0 +1,7 @@
+FORMAT RAM BIN
+OPTION QUIET,
+       NODEFAULTLIBS,
+       START=entry
+       VERBOSE
+       OFFSET=0
+       STACK=0X200
