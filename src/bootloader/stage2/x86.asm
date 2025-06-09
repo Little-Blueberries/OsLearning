@@ -3,6 +3,45 @@ bits 16
 section _TEXT class=CODE
 
 ;
+; void _cdecl x86_div64_32(uint64_t dividend, uint32_t divisor, uint64_t* quotientOut, uint64_t* remainderOut);
+;
+global _x86_div64_32
+_x86_div64_32:
+    ; Make new call frame
+    push bp                 ; Save old cell frame
+    mov bp, sp              ; Intialize new cell frame
+
+	push bx
+
+    ; Divide upper 32 bits
+    mov eax, [bp + 4]       ; eax <- upper 32 bits of dividend
+    mov ecx, [bp + 12]      ; eax <- divisor
+    xor edx, edx
+    div ecx                 ; eax = quote, edx = remainder
+
+    ; Store upper 32 bits of quotient
+    mov bx, [bp + 16]
+    mov [bx + 4], eax
+
+    ; Divide lower 32 bits
+    mov eax, [bp + 4]       ; eax <- lower 32 bits of dividend
+                            ; edx <- old remainder
+	div ecx
+
+	; Store result
+	mov [bx], eax
+	mov bx, [bp + 18]
+	mov [bx], edx
+
+	pop bx
+
+    ; Restore cell frame
+    mov sp, bp
+    pop bp
+    ret
+
+
+;
 ; int 10h, ah = 0Eh
 ; args: characters, pages
 ;

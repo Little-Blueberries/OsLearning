@@ -1,4 +1,7 @@
-stdio.h(4): Warning! W138: No newline at end of file
-stdint.h(10): Warning! W138: No newline at end of file
-x86.h(4): Warning! W138: No newline at end of file
-stdio.c(12): Warning! W138: No newline at end of file
+stdint.h(14): Warning! W138: No newline at end of file
+x86.h(6): Warning! W138: No newline at end of file
+stdio.c(189): Error! E1176: Parameter 4, pointer type mismatch
+stdio.c(189): Note! I2003: source conversion type is 'unsigned long *'
+stdio.c(189): Note! I2004: target conversion type is 'unsigned __int64 *'
+stdio.c(189): Note! I2002: 'x86_div64_32' defined in: x86.h(4)
+stdio.c(204): Warning! W138: No newline at end of file
